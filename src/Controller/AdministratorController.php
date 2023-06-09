@@ -2,46 +2,37 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\UserController as UserController;
 
-class AdministratorController extends AbstractController
+class AdministratorController extends UserController
 {
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
-        $firstName = $role = '';
-        if($this->getUser() != null) {
-            $user = $this->getUser();
-            $userId = $user->getId();
-            $firstName = $user->getFirstName();
-            $email = $user->getUserIdentifier();
+        $this->findUserInfo();
 
-            if(in_array('ROLE_USER', $user->getRoles())) {
-                if(in_array('ROLE_ADMIN', $user->getRoles())) {
-                    $role = 'ADMIN';
-                } elseif(!in_array('ROLE_ADMIN', $user->getRoles()) && in_array('ROLE_SALESPERSON', $user->getRoles())) {
-                    $role = 'SALESPERSON';
-                } else {
-                    $role = 'CLIENT';
-                }
-            }
-        }
+        return $this->render('administrator/index.html.twig', [
+            'userId' => $this->userId,
+            'firstName' => $this->firstName,
+            'role' => $this->role,
+            'email' => $this->email,
+        ]);
+    }
 
-        if($role === 'ADMIN') {
-            return $this->render('administrator/index.html.twig', [
-                'userId' => $userId,
-                'firstName' => $firstName,
-                'role' => $role,
-                'email' => $email,
-            ]);
-        } else {
-            return $this->render('home/index.html.twig', [
-                'firstName' => $firstName,
-                'role' => $role,
-            ]);
-        }
+    #[Route('/admin/users', name: 'app_admin_users')]
+    public function users(UserRepository $userRepository): Response
+    {
+        $users = $userRepository->findAll();
 
+        return $this->render('administrator/users.html.twig',[
+            'userId' => $this->userId,
+            'firstName' => $this->firstName,
+            'role' => $this->role,
+            'email' => $this->email,
+            'users' => $users,
+        ]);
     }
 }

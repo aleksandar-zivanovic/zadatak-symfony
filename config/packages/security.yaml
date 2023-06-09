@@ -23,7 +23,7 @@ security:
                 check_path: app_login
                 enable_csrf: true
             logout:
-                target: /login
+                target: /
                 clear_site_data:
                     - cookies
                     - storage
@@ -42,6 +42,7 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
          - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/salesperson, roles: ROLE_SALESPERSON }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

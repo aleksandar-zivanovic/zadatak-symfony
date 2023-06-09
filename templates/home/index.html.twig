@@ -3,26 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
-    <h1>This is homepage</h1>
-
     <div class="example-wrapper">
         {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <h2>Welcome to the test site</h2>
         {% else %}
-
-        {% endif %}
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <p>You are Admin</p>
-        {% endif %}
-
-        {% if is_granted('ROLE_USER') %}
-            <p>You are User</p>
-        {% endif %}
-
-        {% if is_granted('ROLE_SALESPERSON') %}
-            <p>You are Saleperson</p>
+            <h2>You are logged in!</h2>
         {% endif %}
     </div>
 

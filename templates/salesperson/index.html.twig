@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SalespersonController!{% endblock %}
+{% block title %}Salesperson profle{% endblock %}
 
 {% block body %}
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="m-3">
+        <p>Your ID: {{ userId }}</p>
+        <p>Your name: {{ firstName }}</p>
+        <p>Your email: {{ email }}</p>
+        <p>Your role: {{ role }}</p>
+    </div>
 
-    <h2>•	Prodavcev meni treba da ima opciju Sales</h2>
+    <h2>Salesperson meni treba da ima opciju <a href="{{ url('app_salesperson_sales') }}" target="_blank">Sales</a></h2>
 </div>
 {% endblock %}
