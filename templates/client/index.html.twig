@@ -4,9 +4,11 @@
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="m-3">
+        <p>Your ID: {{ userId }}</p>
+        <p>Your name: {{ firstName }}</p>
+        <p>Your email: {{ email }}</p>
+        <p>Your role: {{ role }}</p>
+    </div>
 
-    <h2>Klijentov meni treba da ima opciju Projects</h2>
-</div>
 {% endblock %}

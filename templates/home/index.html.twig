@@ -1,12 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>This is homepage</h1>
 
-    <h2>Welcome to the test site</h2>
-</div>
+    <div class="example-wrapper">
+        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <h2>Welcome to the test site</h2>
+        {% else %}
+
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <p>You are Admin</p>
+        {% endif %}
+
+        {% if is_granted('ROLE_USER') %}
+            <p>You are User</p>
+        {% endif %}
+
+        {% if is_granted('ROLE_SALESPERSON') %}
+            <p>You are Saleperson</p>
+        {% endif %}
+    </div>
+
+
+
 {% endblock %}
